@@ -1,0 +1,322 @@
+* {
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+    font-weight: 300;
+}
+
+body {   
+	background: #87CEEB;
+    background: -webkit-linear-gradient(to right, #87CEEB, #FFE4B5);
+    background: linear-gradient(to right, #87CEEB, #FFE4B5);
+	
+    background: url(girl.jpg), rgba(0, 0, 0, .1);
+	background-size: 860px;
+    background-blend-mode: color;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    
+    color: white;
+}
+
+#title {
+	display: block;
+	border: none;
+	padding: 10px;
+    background: rgba(255, 255, 255, .6);
+    color: Black;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 100px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+.imput_data {
+    display: block;
+	margin-top: 15px;
+    border: none;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    outline: none;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90%;
+	
+    font-size: 20px;
+}
+
+#track_name::placeholder {
+    color: rgba(255, 255, 255, .3);
+}
+
+#artist_name::placeholder {
+    color: rgba(255, 255, 255, .3);
+}
+
+#recs_count {
+	display: block;
+	margin-top: 15px;
+    border: none;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    outline: none;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 40%;
+	
+    font-size: 15px;
+}
+
+#recs_count::placeholder {
+    color: rgba(255, 255, 255, .3);
+}
+
+#playlist_name::placeholder {
+    color: rgba(255, 255, 255, .3);
+}
+
+#loading {
+	margin-top: 15px;
+}
+
+#playlist_name {
+	display: block;
+	margin-top: 15px;
+    border: none;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    outline: none;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50%;
+	
+    font-size: 15px;
+}
+
+#p_recoms {
+	display: block;
+	margin-top: -15px;
+	border: none;
+    background: rgba(255, 255, 255, .6);
+	padding: 10px;
+	color: Black;
+    width: 100%;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+}
+
+#find {
+    display: block;
+    border: none;
+    margin-top: 15px;
+    
+    background: #4B0082;
+    background: -webkit-linear-gradient(to right, #7FFFD4, #4B0082);
+    background: linear-gradient(to right, #7FFFD4, #4B0082);
+    
+    border-radius: 10px;
+    padding: 20px;    
+    outline: none;
+    
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 40%;
+    
+    color: white; 
+    font-size: 20px;
+    text-transform: uppercase;    
+    cursor: pointer;
+}
+
+#find:hover {
+    transition: 2s;
+    width: 50%;
+}
+
+#find:not(hover) {
+    transition: 2s;
+    width: 40%;
+}
+
+#track_list {
+	display: block;
+    border: none;
+    margin-top: 15px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    outline: none;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 40%;
+	
+    font-size: 15px;
+}
+
+#track_list::placeholder {
+    color: rgba(255, 255, 255, .6);
+}
+
+#recs_button {
+    display: block;
+    border: none;
+    margin-top: 15px;
+    
+    background: #7FFFD4;
+    background: -webkit-linear-gradient(to left, #7FFFD4, #4B0082);
+    background: linear-gradient(to left, #7FFFD4, #4B0082);
+    
+    border-radius: 10px;
+    padding: 20px;    
+    outline: none;
+    
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 40%;
+    
+    color: white; 
+    font-size: 20px;
+    text-transform: uppercase;    
+    cursor: pointer;
+}
+
+#recs_button:hover {
+    transition: 2s;
+    width: 50%;
+}
+
+#recs_button:not(hover) {
+    transition: 2s;
+    width: 40%;
+}
+
+#playlist_tracks {
+	display: block;
+    border: none;
+    margin-top: 15px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    outline: none;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 50%;
+	
+    font-size: 15px;
+}
+
+#playlist_list::placeholder {
+    color: rgba(255, 255, 255, .6);
+}
+
+.module {
+	margin-top: 15px;
+	
+	position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+	
+	width: 80%;
+	padding: 1rem;
+	color: white;
+	border-width: 10px;
+	border-style: solid;
+	border-image: 
+    linear-gradient(
+      to bottom, 
+      #7FFFD4, 
+      #FF8C00
+    ) 1 100%;
+}
+
+.buttons {
+	display: block;
+    border: none;
+    margin-top: 15px;
+    
+    background: rgba(0, 0, 0, .0);
+    
+    border-radius: 10px;
+    padding: 10px;    
+    outline: 3px solid white;
+    
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 40%;
+    
+    color: white; 
+    font-size: 15px;
+    text-transform: uppercase;    
+    cursor: pointer;
+}
+
+#add_button:hover {
+    transition: 2s;
+    color: #4B0082; 
+	outline: 3px solid #4B0082;
+}
+
+#add_button:not(hover) {
+    transition: 2s;
+    color: white; 
+	outline: 3px solid white;
+}
+
+#playlist_name_button:hover {
+    transition: 2s;
+    color: #4B0082; 
+	outline: 3px solid #4B0082;
+}
+
+#playlist_name_button:not(hover) {
+    transition: 2s;
+    color: white; 
+	outline: 3px solid white;
+}
+
+#clear_button:hover {
+    transition: 2s;
+    color: #4B0082; 
+	outline: 3px solid #4B0082;
+}
+
+#clear_button:not(hover) {
+    transition: 2s;
+    color: white; 
+	outline: 3px solid white;
+}
+
+.hr_style {
+	border: 0;
+	height: 3px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	background: #FF8C00;
+    background: -webkit-linear-gradient(left, #7FFFD4, #FF8C00, #7FFFD4);
+    background: linear-gradient(left, #7FFFD4, #FF8C00, #7FFFD4);
+}

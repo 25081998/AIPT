@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Музыкальные рекомендации</title>
+    
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    
+    <link rel="icon" type="image/png" href="/music-icon.png">
+    <link rel="stylesheet" href="main.css">            
+</head>
+
+<body>
+    <p id="title">Введи свою музыку, а я помогу найти похожее!</p>
+    
+    <input id="track_name" type="text" placeholder="Название трека..." required="" class="imput_data">
+    <input id="artist_name" type="text" placeholder="Исполнитель..." required="" class="imput_data">
+    
+    <button id="find">Ввести трек</button>
+	
+	<hr id="hr1" class="hr_style" hidden=true>
+    
+    <div id="found" hidden=true></div>
+    <div id="add" hidden=true></div>
+	
+    <div id="playlist" hidden=true>
+        <select id="playlist_tracks" size=7 multiple><option disabled>Ваш плейлист</option></select>
+        <input id="playlist_name" type="text" placeholder="Название плейлиста..." required="">
+        <button id="playlist_name_button" class="buttons">Ввести название</button>
+    </div>
+	
+	<hr id="hr2" class="hr_style" hidden=true>
+	
+    <div id="recoms" hidden=true>
+        <input id="recs_count" type="text" placeholder="Количество рекомендаций..." required="">
+        <button id="recs_button" disabled=true>Сделать рекомендации</button>
+		<button id="clear_button" disabled=true class="buttons">Сбросить все</button>
+    </div>
+	
+	<div id="loading"></div>
+	
+	<div id="recoms_table" class="module" hidden=true></div>   
+        
+    <script type="text/javascript">   		
+        async function display_tracks() {
+            let track_name = document.getElementById('track_name').value;
+            let artist_name = document.getElementById('artist_name').value;            
+            let res = await eel.find_tracks(track_name, artist_name)();
+            
+            var data = JSON.parse(res);
+            var list = ''; 
+
+            for (let key in data) {
+                list += '<option>' + data[key].track_name + ' / ' + data[key].artist_name + '</option>';
+            }
+			
+			document.getElementById('hr1').hidden = false;
+			document.getElementById('playlist').hidden = false;
+			document.getElementById('recoms').hidden = false; 
+			document.getElementById('found').hidden = false;
+			document.getElementById('add').hidden = false;
+			document.getElementById('hr2').hidden = false; 
+
+            document.getElementById('found').innerHTML = '';
+            document.getElementById('found').innerHTML += '<input id="track_list" type="text" list="tracks" placeholder="Найденные треки"/>';
+            document.getElementById('found').innerHTML += '<datalist id="tracks">' + list + '</datalist>';
+            document.getElementById('add').innerHTML = '<button id="add_button" class="buttons">Добавить в плейлист</button>';
+        }
+
+        async function add_tracks() {
+            let track = JSON.stringify(document.getElementById('track_list').value);                       
+            let res = await eel.add_track(track)();  
+            
+            const newOption = document.createElement('option');
+            const optionText = document.createTextNode(track);
+            newOption.appendChild(optionText);
+            newOption.setAttribute('value', 'Option Value');
+            document.getElementById('playlist_tracks').appendChild(newOption);   
+            
+            document.getElementById('recs_button').disabled = false;
+			document.getElementById('clear_button').disabled = false;            
+        }
+        
+        async function name_playlist() {           
+            document.getElementById("playlist_tracks").options[0].text = document.getElementById("playlist_name").value;
+        }
+        
+        async function make_recoms() {
+            document.getElementById('loading').innerHTML = 'Идет загрузка. Подождите...';
+
+            let name = document.getElementById("playlist_tracks").options[0].text;
+            let count = document.getElementById("recs_count").value;
+            let res = await eel.make_recomends(name, count)();
+            
+            document.getElementById('loading').innerHTML = '';
+			document.getElementById('recoms_table').innerHTML = '';
+			document.getElementById('recoms_table').innerHTML += '<p id="p_recoms">Ваши рекомендации</p>';
+			document.getElementById('recoms_table').innerHTML += res;
+			document.getElementById('recoms_table').hidden = false;
+        }
+		
+		async function clear() {
+			await eel.clear_info()();
+			
+			document.getElementById('hr2').hidden = true;
+			document.getElementById('playlist').hidden = true;
+			document.getElementById('recoms').hidden = true;
+			document.getElementById('found').hidden = true;
+			document.getElementById('add').hidden = true;
+			document.getElementById('recoms_table').hidden = true;
+			document.getElementById('hr1').hidden = true;
+			
+			document.getElementById('recs_button').disabled = true;
+			document.getElementById('clear_button').disabled = true;
+		
+			document.getElementById('track_name').value = '';
+			document.getElementById('artist_name').value = '';
+			document.getElementById('playlist_name').value = '';
+			document.getElementById('recs_count').value = '';
+			
+			document.getElementById('found').innerHTML = '';
+			document.getElementById('add').innerHTML = '';
+			document.getElementById('recoms_table').innerHTML = '';			
+
+			document.getElementById("playlist_tracks").options[0].text = 'Ваш плейлист';
+			
+			while (document.getElementById('playlist_tracks').options.length > 1) {
+				document.getElementById('playlist_tracks').remove(document.getElementById('playlist_tracks').options.length - 1);
+			}
+        }
+        
+        $( "#add" ).click(function() {
+            add_tracks(); 
+        });
+		
+        $( "#find" ).click(function() {
+            display_tracks(); 
+        });
+		
+        $( "#playlist_name_button" ).click(function() {
+            name_playlist(); 
+        });
+		
+        $( "#recs_button" ).click(function() {
+            make_recoms();
+        });
+		
+		$( "#clear_button" ).click(function() {
+			clear();
+        });  
+		
+		window.onresize = function () {
+			window.resizeTo(600, 800);
+		}
+    </script>
+</body>
+</html>
